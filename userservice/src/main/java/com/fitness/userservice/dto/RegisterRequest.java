@@ -11,6 +11,8 @@ public class RegisterRequest {
     @Email(message = "Invalid email format")
     private String email;
 
+    private String keycloakId;
+
     @NotBlank(message = "Password cannot be blank")
     @Pattern(
             regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$",

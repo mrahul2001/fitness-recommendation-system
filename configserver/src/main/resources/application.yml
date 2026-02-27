@@ -8,4 +8,8 @@ spring:
       server:
         native:
           search-locations: classpath:/config
+    client:
+      hostname: localhost
 
+server:
+  port: 8888
