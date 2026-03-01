@@ -2,12 +2,12 @@ package com.fitness.userservice.service;
 
 import com.fitness.userservice.dto.RegisterRequest;
 import com.fitness.userservice.dto.UserResponse;
-import com.fitness.userservice.exception.EmailAlreadyExistsException;
 import com.fitness.userservice.exception.UserNotFoundException;
 import com.fitness.userservice.model.User;
 import com.fitness.userservice.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,26 +20,33 @@ public class UserService {
     public UserResponse registerUser(RegisterRequest registerRequest) {
 
         if (userRepository.existsByEmail(registerRequest.getEmail())) {
-            throw new EmailAlreadyExistsException("Email already registered");
+            User existingUser = userRepository.findByEmail(registerRequest.getEmail());
+            return getUserResponse(existingUser);
         }
 
         User user = new User();
         user.setEmail(registerRequest.getEmail());
         user.setPassword(registerRequest.getPassword());
+        user.setKeycloakId(registerRequest.getKeycloakId());
         user.setFirstName(registerRequest.getFirstName());
         user.setLastName(registerRequest.getLastName());
 
         User savedUser = userRepository.save(user);
+        return getUserResponse(savedUser);
+    }
 
+    @NonNull
+    private UserResponse getUserResponse(User fetchingUser) {
         UserResponse userResponse = new UserResponse();
-        userResponse.setId(savedUser.getId());
-        userResponse.setEmail(savedUser.getEmail());
-        userResponse.setPassword(savedUser.getPassword());
-        userResponse.setFirstName(savedUser.getFirstName());
-        userResponse.setLastName(savedUser.getLastName());
-        userResponse.setCreatedAt(savedUser.getCreatedAt());
-        userResponse.setUpdatedAt(savedUser.getUpdatedAt());
-        
+        userResponse.setId(fetchingUser.getId());
+        userResponse.setKeycloakId(fetchingUser.getKeycloakId());
+        userResponse.setEmail(fetchingUser.getEmail());
+        userResponse.setPassword(fetchingUser.getPassword());
+        userResponse.setFirstName(fetchingUser.getFirstName());
+        userResponse.setLastName(fetchingUser.getLastName());
+        userResponse.setCreatedAt(fetchingUser.getCreatedAt());
+        userResponse.setUpdatedAt(fetchingUser.getUpdatedAt());
+
         return userResponse;
     }
 
