@@ -1,8 +1,6 @@
 package com.fitness.aiservice.controller;
 
 import com.fitness.aiservice.model.Recommendation;
-import com.fitness.aiservice.service.ActivityAiService;
-import com.fitness.aiservice.service.GeminiService;
 import com.fitness.aiservice.service.RecommendationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RecommendationController {
     private final RecommendationService recommendationService;
-    private final GeminiService geminiService;
-    private final ActivityAiService activityAiService;
 
     @GetMapping("/user/{userID}")
     public ResponseEntity<List<Recommendation>> getUserRecommendations(@PathVariable String userID) {

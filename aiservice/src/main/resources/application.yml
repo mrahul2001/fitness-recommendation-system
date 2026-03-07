@@ -1,5 +1,7 @@
+# ai-service
+
 spring:
   application:
-   name: ai-service
+   name: aiservice
   config:
-    import: optional:configserver:http://localhost:8888
+    import: optional:configserver:http://configserver:8888

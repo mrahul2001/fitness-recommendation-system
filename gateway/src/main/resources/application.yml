@@ -1,8 +1,10 @@
+# gateway
+
 spring:
   application:
     name: gateway
   config:
-    import: optional:configserver:http://localhost:8888
+    import: optional:configserver:http://configserver:8888
 
 logging:
   level:

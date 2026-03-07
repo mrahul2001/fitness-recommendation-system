@@ -1,6 +1,8 @@
+# activity-service
+
 spring:
   application:
-    name: activity-service
+    name: activityservice
   config:
-    import: optional:configserver:http://localhost:8888
+    import: optional:configserver:http://configserver:8888
 

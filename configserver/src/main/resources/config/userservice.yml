@@ -1,15 +1,15 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/fitness_user_db
-    username: postgres
-    password: Ranaghat@1
+    url: jdbc:postgresql://postgres:5432/fitness_user_db
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
       database-platform: org.hibernate.dialect.PostgreSQLDialect
   cloud:
     client:
-      hostname: localhost
+      hostname: userservice
 
 server:
   port: 8080
@@ -17,6 +17,6 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://eureka:8761/eureka
   instance:
-    prefer-ip-address: true
+    prefer-ip-address: false
