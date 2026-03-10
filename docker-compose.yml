@@ -60,6 +60,8 @@ services:
         condition: service_healthy
       configserver:
         condition: service_healthy
+      gateway:
+        condition: service_healthy
 
   activityservice:
     build: ./activityservice
@@ -72,6 +74,8 @@ services:
       eureka:
         condition: service_healthy
       configserver:
+        condition: service_healthy
+      gateway:
         condition: service_healthy
 
   aiservice:
@@ -87,6 +91,8 @@ services:
       eureka:
         condition: service_healthy
       configserver:
+        condition: service_healthy
+      gateway:
         condition: service_healthy
 
   gateway:
